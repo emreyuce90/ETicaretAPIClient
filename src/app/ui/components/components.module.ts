@@ -12,6 +12,6 @@ import { HomeModule } from './home/home.module';
     CommonModule,
     BasketModule,
     ProductsModule,
-    HomeModule
+    HomeModule]
 })
 export class ComponentsModule { }
