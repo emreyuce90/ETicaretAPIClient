@@ -6,6 +6,7 @@ import { OrdersModule } from './orders/orders.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ProductsModule } from './products/products.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -16,7 +17,7 @@ import { ProductsModule } from './products/products.module';
     CustomersModule,
     OrdersModule,
     DashboardModule,
-    ProductsModule
+    ProductsModule,
   ]
 })
 export class ComponentsModule { }
