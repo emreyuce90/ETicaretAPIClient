@@ -11,6 +11,3 @@ export class AppComponent {
   title = 'ETicaretAPIClient';
 }
 
-$(document).ready(()=>{
-  alert('test')
-});
