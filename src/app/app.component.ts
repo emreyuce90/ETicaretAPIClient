@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrNotificationService, ToastrOpt } from './services/ui/toastr-notification.service';
 
 declare var $:any;
@@ -13,6 +14,7 @@ export class AppComponent {
   title = 'ETicaretAPIClient';
   constructor(private toastr:ToastrNotificationService){
     toastr.showToastrMessage("Test","LoremIpsum",ToastrOpt.Success);
+
   }
 }
 
