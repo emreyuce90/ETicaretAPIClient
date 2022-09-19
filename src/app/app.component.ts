@@ -17,4 +17,11 @@ export class AppComponent {
 
   }
 }
+$.ajax({
+  method:"get",
+  url:"https://localhost:7021/api/products",
+  success:function(data){
+    console.log(data)
+  }
+})
 
