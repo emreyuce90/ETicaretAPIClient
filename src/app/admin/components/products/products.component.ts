@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { HttpClientService } from 'src/app/common/http-client.service';
+import { Product } from 'src/app/contracts/product';
 
 @Component({
   selector: 'app-products',
@@ -34,6 +35,14 @@ export class ProductsComponent extends BaseComponent implements OnInit {
     // this.httpClientService.delete({
     //   controller: "products"
     // },"d29bc2b9-6467-4652-d5b8-08da9b0227d0").subscribe();
+    //Consuming different API Example
+    // this.httpClientService.get({
+    //   fullEndpoint: "https://jsonplaceholder.typicode.com/posts"
+    // }).subscribe(data => console.log(data))
 
+    //get with contract
+    this.httpClientService.get<Product>({
+      controller:"products"
+    }).subscribe(data=>console.log(data[0].price))
   }
 }
