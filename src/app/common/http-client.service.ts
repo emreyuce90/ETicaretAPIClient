@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,34 +11,46 @@ export class HttpClientService {
 
   private baseUrl: string = "https://localhost:7021/api";
 
-  //baseUrl dolu ise request parameters tan gelen url yi baz al değilse bu serviste tanımlanmış olan baseUelyi baz al, request parametreden controller ı al eğer action tanımlanmışsa actionu al tanımlanmamışsa boş bırak
+
   private url(requestParameters: Partial<RequestParameters>): string {
     return `${requestParameters.baseUrl ? requestParameters.baseUrl : this.baseUrl}/${requestParameters.controller}${requestParameters.action ? `/${requestParameters.action}` : ""}`;
   }
-  get<T>(requestParameters: Partial<RequestParameters>, id?: string) {
-    //isteğin yapılacağı url
+  get<T>(requestParameters: Partial<RequestParameters>, id?: string): Observable<T> {
     let url: string = "";
-    //get istekleri için özelleştirdiğimiz url
-    //eğer requestParameters tan full endpoint geldiyse requestParameters tan gelen fullendpointi eğer fullendpoint ten veri gelmezse de yukarıda yazdığımız metoda oluşturduğumuz requestParametersi metoda vererek urlyi geçeriz
     if (requestParameters.fullEndpoint != null) {
       url = requestParameters.fullEndpoint;
     } else {
       url = `${this.url(requestParameters)}${id ? `/${id}` : ""}`;
     }
     return this.httpClient.get<T>(url, { headers: requestParameters.headers });
-
   }
 
-  post() {
-
+  post<T>(requestParameters: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
+    let url: string = "";
+    if (requestParameters.fullEndpoint)
+      url = requestParameters.fullEndpoint;
+    else
+      url = `${this.url(requestParameters)}`
+    return this.httpClient.post<T>(url, body, { headers: requestParameters.headers });
   }
 
-  put() {
-
+  put<T>(requestParameters: Partial<RequestParameters>, body: Partial<T>) {
+    let url: string = "";
+    if (requestParameters.fullEndpoint)
+      url = requestParameters.fullEndpoint;
+    else
+      url = `${this.url(requestParameters)}`;
+    return this.httpClient.put<T>(url, body, { headers: requestParameters.headers })
   }
 
-  delete() {
-
+  
+  delete<T>(requestParameters: Partial<RequestParameters>, id: string) {
+    let url: string = "";
+    if (requestParameters.fullEndpoint)
+      url = requestParameters.fullEndpoint;
+    else
+    url=`${this.url(requestParameters)}/${id}`;
+    return this.httpClient.delete(url,{headers:requestParameters.headers});
   }
 
 }
