@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class ListProductComponent implements OnInit {
 
   constructor() { }
-
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate','modifiedDate'];
+  dataSource = null;
   ngOnInit(): void {
   }
 
 }
+

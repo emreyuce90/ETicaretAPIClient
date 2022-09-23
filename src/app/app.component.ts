@@ -12,16 +12,17 @@ declare var $:any;
 
 export class AppComponent {
   title = 'ETicaretAPIClient';
-  constructor(private toastr:ToastrNotificationService){
-    toastr.showToastrMessage("Test","LoremIpsum",ToastrOpt.Success);
+  // constructor(private toastr:ToastrNotificationService){
+  //   toastr.showToastrMessage("Test","LoremIpsum",ToastrOpt.Success);
 
-  }
+  // }
+  constructor(){}
 }
-$.ajax({
-  method:"get",
-  url:"https://localhost:7021/api/products",
-  success:function(data){
-    console.log(data)
-  }
-})
+// $.ajax({
+//   method:"get",
+//   url:"https://localhost:7021/api/products",
+//   success:function(data){
+//     console.log(data)
+//   }
+// })
 
