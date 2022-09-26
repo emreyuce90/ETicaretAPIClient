@@ -1,11 +1,11 @@
-export class ProductlistViewModel {
-name:string;
-stock:number;
-price:number;
-id:string;
-createdDate:Date;
-modifiedDate:Date;
-}
+    export class ProductlistViewModel {
+    name:string;
+    stock:number;
+    price:number;
+    id:string;
+    createdDate:Date;
+    modifiedDate:Date;
+    }
 
 
 /*
