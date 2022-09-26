@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { ProductService } from 'src/app/common/models/product.service';
 import { ProductCreateModel } from 'src/app/contracts/ProductCreateModel';
@@ -20,6 +20,8 @@ export class CreateProductComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @Output() createdProduct :EventEmitter<ProductCreateModel> = new EventEmitter();
+
   create(name: HTMLInputElement, price: HTMLInputElement, stock: HTMLInputElement) {
     //yükleniyor görselini aktif et
     this.showSpinner(SpinnerType.BallTrianglePath);
@@ -34,7 +36,7 @@ export class CreateProductComponent extends BaseComponent implements OnInit {
       this.hideSpinner(SpinnerType.BallTrianglePath)
       this.alertifyService.message("Ürün ekleme başarılı!",{messageType:MessageType.Success,position:MessagePosition.ÜstSağ})
     });
-    
+    this.createdProduct.emit(createProduct);
   }
 
 

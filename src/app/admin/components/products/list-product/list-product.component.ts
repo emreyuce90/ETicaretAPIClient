@@ -39,11 +39,11 @@ export class ListProductComponent extends BaseComponent implements OnInit {
 
   }
   async pageChanged() {
-    this.listProduct()
+    await this.listProduct()
   }
 
   async ngOnInit() {
-    this.listProduct();
+    await this.listProduct();
   }
 
 }
