@@ -1,4 +1,4 @@
-export class Productlist {
+export class ProductlistViewModel {
 name:string;
 stock:number;
 price:number;

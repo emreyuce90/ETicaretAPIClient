@@ -20,7 +20,7 @@ export class HttpClientService {
     if (requestParameters.fullEndpoint != null) {
       url = requestParameters.fullEndpoint;
     } else {
-      url = `${this.url(requestParameters)}${id ? `/${id}` : ""}`;
+      url = `${this.url(requestParameters)}${id ? `/${id}` : ""}${requestParameters.queryString ? `?${requestParameters.queryString}`:""}`;
     }
     return this.httpClient.get<T>(url, { headers: requestParameters.headers });
   }
@@ -61,5 +61,6 @@ export class RequestParameters {
   headers?: HttpHeaders;
   baseUrl?: string;
   fullEndpoint?: string;
+  queryString?:string;
 }
 
