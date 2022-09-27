@@ -21,9 +21,9 @@ export class ProductsComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerType.BallTrianglePath);
   }
 
-  @ViewChild(ListProductComponent) listProducts:ListProductComponent
+  @ViewChild(ListProductComponent) listProducts:ListProductComponent;
 
-  async createdProduct(createdProduct:ProductCreateModel){
-    await this.listProducts.listProduct();
+   createdProduct(createdProduct:ProductCreateModel){
+     this.listProducts.listProduct();
   }
 }

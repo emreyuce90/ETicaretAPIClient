@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BaseComponent, SpinnerType } from '../../../../base/base.component';
 import { CustomerService } from '../../../../common/models/customer.service';
 import { CustomerCreateModel } from '../../../../contracts/customer-create-model';
@@ -18,7 +18,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+@Output() createdCustomer :EventEmitter<CustomerCreateModel> = new EventEmitter();
   createCustomer(txtName: HTMLInputElement) {
     this.showSpinner(SpinnerType.BallTrianglePath);
     const model: CustomerCreateModel = new CustomerCreateModel();
@@ -27,6 +27,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
       this.hideSpinner(SpinnerType.BallTrianglePath)
       this.alertifyService.message("Müşteri ekleme işlemi başarılı", { messageType: MessageType.Success, position: MessagePosition.ÜstSağ })
     });
+    this.createdCustomer.emit(model);
   }
 
 }
