@@ -22,10 +22,10 @@ export class ListProductComponent extends BaseComponent implements OnInit {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   //dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'modifiedDate'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'modifiedDate','edit','delete'];
   dataSource: MatTableDataSource<ProductlistViewModel> = null;
   /*
- Sayfa ilk yüklendiğinde spinnerı aktif et ,başarılı olma durumunda spinnerı gizle,hata durumunda alrtifyla error mesajı bas,gelen datayı matTableData source türünden karşıla ve await ile beklenilen datayı data source a ver 
+ Sayfa ilk yüklendiğinde spinnerı aktif et ,başarılı olma durumunda spinnerı gizle,hata durumunda alrtifyla error mesajı bas,gelen datayı matTableData source türünden karşıla ve await ile beklenilen datayı data source a ver
   */
   async listProduct() {
     this.showSpinner(SpinnerType.BallTrianglePath);
