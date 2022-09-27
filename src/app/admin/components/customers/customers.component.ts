@@ -2,6 +2,7 @@ import { APP_ID, Component, OnInit } from '@angular/core';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import{NgxSpinnerService} from 'ngx-spinner';
 
+
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',

@@ -8,8 +8,8 @@ import { ListComponent } from './list/list.component';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     RouterModule.forChild([
       {path:"",component:CustomersComponent}
-    ]), MatSidenavModule, MatFormFieldModule, MatButtonModule, MatInputModule
+    ]), MatSidenavModule, MatFormFieldModule, MatButtonModule, MatInputModule,MatTableModule,MatPaginatorModule
     
   ]
 })
