@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { HttpClientService } from 'src/app/common/http-client.service';
 
 @Directive({
@@ -15,6 +15,11 @@ export class EditDirective {
     _renderer.appendChild(element.nativeElement,img);
    }
 
-
+   /*Direktifin kullanıldığı componentte direktif tıklanıldığında onclick metodunu çalıştır*/
+   @HostListener('click')
+   onclick() {
+     alert('Update button clicked');
+    
+   }
 
 }
