@@ -12,11 +12,12 @@ import { BaseComponent } from './base/base.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteDirective } from './directives/admin/delete.directive';
 import { EditDirective } from './directives/admin/edit.directive';
+import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
