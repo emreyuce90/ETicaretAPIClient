@@ -7,11 +7,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ProductsModule } from './products/products.module';
 import { RouterModule } from '@angular/router';
+import { DeleteDirective } from '../../directives/admin/delete.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
     CommonModule,
     CustomersModule,

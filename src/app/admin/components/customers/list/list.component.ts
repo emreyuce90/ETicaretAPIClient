@@ -21,7 +21,7 @@ export class ListComponent extends BaseComponent implements OnInit {
   constructor(private customerService: CustomerService, spinner: NgxSpinnerService, private alertify: AlertifyService) {
     super(spinner);
   }
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name','delete'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource = new MatTableDataSource<any>(null);
 

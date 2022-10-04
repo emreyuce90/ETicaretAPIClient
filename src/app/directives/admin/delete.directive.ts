@@ -8,18 +8,21 @@ import {
   Output,
   Renderer2,
 } from '@angular/core';
-import { HttpClientService } from 'src/app/common/http-client.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent, SpinnerType } from '../../base/base.component';
 import { ProductService } from '../../common/models/product.service';
 declare var $: any;
 @Directive({
   selector: '[appDelete]',
 })
-export class DeleteDirective {
+export class DeleteDirective extends BaseComponent {
   constructor(
+    spinner:NgxSpinnerService, 
     private _render: Renderer2,
     private element: ElementRef,
-    private _productService: ProductService
+    private _productService: ProductService,
   ) {
+    super(spinner)
     //Bir tane image etiketi oluşturduk bu image e path verdik
     //Üzerine gelindiğinde mouse un pointer olmasını söyledik
     //bu image e genişlik ve yükseklik bildirdik
@@ -40,6 +43,7 @@ export class DeleteDirective {
   //Silme operasyonunu başlatabilmek için click eventini  HostListener ile yakalayalım
   @HostListener('click')
   async onclick() {
+    this.showSpinner(SpinnerType.BallTrianglePath);
     //Input propertysinden gelen değeri productService operasyonuyla silelim
     await this._productService.delete(this.id);
     //Silme işleminden sonra tr yi jquery ile hide edelim ve tablomuzu yenileyelim
