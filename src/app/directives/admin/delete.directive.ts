@@ -62,7 +62,7 @@ export class DeleteDirective extends BaseComponent {
           //Silme işleminden sonra tr yi jquery ile hide edelim ve tablomuzu yenileyelim
           const td = this.element.nativeElement;
           $(td.parentElement).fadeOut(500, () => this.callback.emit());
-          this._alertifyService.message("Silme işlemi başarılı", {position:MessagePosition.ÜstSağ,messageType:MessageType.Success})
+          this._alertifyService.message("Silme işlemi başarılı", { position: MessagePosition.ÜstSağ, messageType: MessageType.Success })
         }, (errorResponse: HttpErrorResponse) => {
           this._alertifyService.message("Silme işlemi başarısız", { position: MessagePosition.ÜstSağ, messageType: MessageType.Error })
         })
