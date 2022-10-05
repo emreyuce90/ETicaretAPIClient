@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   Directive,
   ElementRef,
@@ -11,19 +12,22 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from '../../base/base.component';
-import { ProductService } from '../../common/models/product.service';
+import { HttpClientService } from '../../common/http-client.service';
 import { DeleteDialogComponent, DialogContent } from '../../dialogs/delete-dialog/delete-dialog.component';
+import { AlertifyService, MessagePosition, MessageType } from '../../services/admin/alertify.service';
+import { ToastrNotificationService } from '../../services/ui/toastr-notification.service';
 declare var $: any;
 @Directive({
   selector: '[appDelete]',
 })
 export class DeleteDirective extends BaseComponent {
   constructor(
+    private _alertifyService: AlertifyService,
     public dialog: MatDialog,
-    spinner:NgxSpinnerService, 
+    spinner: NgxSpinnerService,
     private _render: Renderer2,
     private element: ElementRef,
-    private _productService: ProductService,
+    private _httpClientService: HttpClientService
   ) {
     super(spinner)
     //Bir tane image etiketi oluşturduk bu image e path verdik
@@ -38,6 +42,7 @@ export class DeleteDirective extends BaseComponent {
     _render.appendChild(element.nativeElement, img);
   }
 
+  @Input() controllerName: string;
   //Tabloyu yenileyebilmek için yani list operasyonunu tetikleyebilmek için bir output eventemitter oluşturmamız gerekir
   @Output() callback: EventEmitter<any> = new EventEmitter();
 
@@ -49,15 +54,24 @@ export class DeleteDirective extends BaseComponent {
     this.openDialog(async () => {
       this.showSpinner(SpinnerType.BallTrianglePath);
       //Input propertysinden gelen değeri productService operasyonuyla silelim
-      await this._productService.delete(this.id);
-      //Silme işleminden sonra tr yi jquery ile hide edelim ve tablomuzu yenileyelim
-      const td = this.element.nativeElement;
-      $(td.parentElement).fadeOut(500, () => this.callback.emit());
+      await this._httpClientService.delete(
+        {
+          controller: this.controllerName
+
+        }, this.id).subscribe(d => {
+          //Silme işleminden sonra tr yi jquery ile hide edelim ve tablomuzu yenileyelim
+          const td = this.element.nativeElement;
+          $(td.parentElement).fadeOut(500, () => this.callback.emit());
+          this._alertifyService.message("Silme işlemi başarılı", {position:MessagePosition.ÜstSağ,messageType:MessageType.Success})
+        }, (errorResponse: HttpErrorResponse) => {
+          this._alertifyService.message("Silme işlemi başarısız", { position: MessagePosition.ÜstSağ, messageType: MessageType.Error })
+        })
+
     });
-    
+
   }
 
-  openDialog(callBack:any): void {
+  openDialog(callBack: any): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: DialogContent.Yes,
