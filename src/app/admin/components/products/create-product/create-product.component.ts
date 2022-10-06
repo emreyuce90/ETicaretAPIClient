@@ -4,6 +4,7 @@ import { ProductService } from 'src/app/common/models/product.service';
 import { ProductCreateModel } from 'src/app/contracts/ProductCreateModel';
 import { AlertifyService, MessagePosition, MessageType } from 'src/app/services/admin/alertify.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FileUploadOptions } from '../../../../common/file-upload/file-upload.component';
 
 
 @Component({
@@ -21,6 +22,15 @@ export class CreateProductComponent extends BaseComponent implements OnInit {
   }
 
   @Output() createdProduct :EventEmitter<ProductCreateModel> = new EventEmitter();
+
+  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
+    accept: ".jpg, .png, .jpeg",
+    actionName: "upload",
+    controllerName: "products",
+    explanation: "Lütfen bir resim seçiniz",
+    isAdmin: true
+  };
+  
 
   create(name: HTMLInputElement, price: HTMLInputElement, stock: HTMLInputElement) {
     //yükleniyor görselini aktif et

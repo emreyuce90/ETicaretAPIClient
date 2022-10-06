@@ -6,11 +6,11 @@
     "\\src\\app\\admin",
     "\\src\\app\\admin\\components",
     "\\src\\app\\admin\\components\\products",
-    "\\src\\app\\dialogs",
-    "\\src\\app\\dialogs\\delete-dialog",
-    "\\src\\app\\directives",
+    "\\src\\app\\admin\\components\\products\\create-product",
+    "\\src\\app\\common",
+    "\\src\\app\\common\\file-upload",
     "\\src\\app\\directives\\admin"
   ],
-  "SelectedNode": "\\src\\app\\directives\\admin\\delete.directive.ts",
+  "SelectedNode": "\\src\\app\\common\\file-upload\\file-upload.module.ts",
   "PreviewInSolutionExplorer": false
 }

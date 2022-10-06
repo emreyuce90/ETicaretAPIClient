@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgxFileDropEntry } from 'ngx-file-drop/ngx-file-drop/ngx-file-drop-entry';
+import { AlertifyService, MessagePosition, MessageType } from '../../services/admin/alertify.service';
+import { ToastrNotificationService, ToastrOpt } from '../../services/ui/toastr-notification.service';
+import { HttpClientService } from '../http-client.service';
 
 
 @Component({
@@ -8,51 +12,61 @@ import { NgxFileDropEntry } from 'ngx-file-drop/ngx-file-drop/ngx-file-drop-entr
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
+  constructor
+    (
+    private httpclientService: HttpClientService,
+    private _toasterService: ToastrNotificationService,
+      private _alertifyService:AlertifyService
+    ) {
 
-  public files: NgxFileDropEntry[] = [];
+  }
+  @Input() options: Partial<FileUploadOptions>;
+  public files: NgxFileDropEntry[];
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
-    for (const droppedFile of files) {
 
-      // Is it a file?
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-
-          // Here you can access the real file
-          console.log(droppedFile.relativePath, file);
-
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
-
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
-
-        });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
-      }
+    //formData şeklinde göndermemiz gerekiyor formDatayı newleyelim
+    const fileData: FormData = new FormData;
+    //drop edilen dosyalar bize NgxFileDrop entry şeklinde geliyor,bunları FileSystemFileEntry tipine dönüştürmeliyiz
+    //bu tipe dönüştürdükten sonra dosyanın file ı üzerinden file ın adını blob değerini vs de formDataya append ettik
+    for (const dosya of files) {
+      (dosya.fileEntry as FileSystemFileEntry).file((_file: File) => { fileData.append(_file.name, _file, dosya.relativePath) });
     }
+    this.httpclientService.post({
+      action: this.options.actionName,
+      controller: this.options.controllerName,
+      queryString: this.options.queryString,
+      headers: new HttpHeaders({ "responseType": "blob" })
+    }, fileData).subscribe(d => {
+      const message:string = "Dosya yükleme işlemi başarılı";
+      if (this.options.isAdmin) {
+        this._alertifyService.message(message, {
+          messageType: MessageType.Success,
+          position:MessagePosition.ÜstSağ
+        })
+      } else {
+        this._toasterService.showToastrMessage("Başarılı",message,ToastrOpt.Success)
+      }
+    }, (httpErrorResponse: HttpErrorResponse) => {
+      const message: string = "Dosya yükleme işleminde bir hata meydana geldi";
+      if (this.options.isAdmin) {
+        this._alertifyService.message(message, {
+          messageType: MessageType.Error,
+          position: MessagePosition.ÜstSağ
+        })
+      } else {
+        this._toasterService.showToastrMessage("İşlem Başarısız", message, ToastrOpt.Error)
+      }
+    })
   }
+}
 
-  public fileOver(event) {
-    console.log(event);
-  }
-
-  public fileLeave(event) {
-    console.log(event);
-  }
+export class FileUploadOptions {
+  controllerName?: string;
+  actionName?: string;
+  queryString?: string;
+  explanation?: string;
+  accept?: string;
+  isAdmin: boolean = false;
 }
