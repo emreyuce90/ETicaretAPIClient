@@ -9,8 +9,8 @@
     "\\src\\app\\admin\\components\\products\\create-product",
     "\\src\\app\\common",
     "\\src\\app\\common\\file-upload",
-    "\\src\\app\\directives\\admin"
+    "\\src\\app\\services\\ui"
   ],
-  "SelectedNode": "\\src\\app\\common\\file-upload\\file-upload.module.ts",
+  "SelectedNode": "\\src\\app\\admin\\components\\products\\create-product\\create-product.component.html",
   "PreviewInSolutionExplorer": false
 }
