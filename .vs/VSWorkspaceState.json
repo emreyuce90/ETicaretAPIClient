@@ -8,9 +8,8 @@
     "\\src\\app\\admin\\components\\products",
     "\\src\\app\\admin\\components\\products\\create-product",
     "\\src\\app\\common",
-    "\\src\\app\\common\\file-upload",
-    "\\src\\app\\services\\ui"
+    "\\src\\app\\common\\file-upload"
   ],
-  "SelectedNode": "\\src\\app\\admin\\components\\products\\create-product\\create-product.component.html",
+  "SelectedNode": "\\src\\app\\admin\\components\\products\\create-product\\create-product.component.ts",
   "PreviewInSolutionExplorer": false
 }
