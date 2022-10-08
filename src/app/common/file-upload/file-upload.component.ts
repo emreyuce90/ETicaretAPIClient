@@ -1,6 +1,8 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { NgxFileDropEntry } from 'ngx-file-drop/ngx-file-drop/ngx-file-drop-entry';
+import { UploadDialogComponent, UploadDialogParameters } from '../../dialogs/upload-dialog/upload-dialog.component';
 import { AlertifyService, MessagePosition, MessageType } from '../../services/admin/alertify.service';
 import { ToastrNotificationService, ToastrOpt } from '../../services/ui/toastr-notification.service';
 import { HttpClientService } from '../http-client.service';
@@ -14,51 +16,73 @@ import { HttpClientService } from '../http-client.service';
 export class FileUploadComponent {
   constructor
     (
-    private httpclientService: HttpClientService,
-    private _toasterService: ToastrNotificationService,
-      private _alertifyService:AlertifyService
+      public dialog: MatDialog,
+      private httpclientService: HttpClientService,
+      private _toasterService: ToastrNotificationService,
+      private _alertifyService: AlertifyService
     ) {
 
   }
+
+
+
+
+
   @Input() options: Partial<FileUploadOptions>;
   public files: NgxFileDropEntry[];
 
   public dropped(files: NgxFileDropEntry[]) {
-    this.files = files;
+    this.openDialog(() => {
+      this.files = files;
 
-    //formData şeklinde göndermemiz gerekiyor formDatayı newleyelim
-    const fileData: FormData = new FormData;
-    //drop edilen dosyalar bize NgxFileDrop entry şeklinde geliyor,bunları FileSystemFileEntry tipine dönüştürmeliyiz
-    //bu tipe dönüştürdükten sonra dosyanın file ı üzerinden file ın adını blob değerini vs de formDataya append ettik
-    for (const dosya of files) {
-      (dosya.fileEntry as FileSystemFileEntry).file((_file: File) => { fileData.append(_file.name, _file, dosya.relativePath) });
-    }
-    this.httpclientService.post({
-      action: this.options.actionName,
-      controller: this.options.controllerName,
-      queryString: this.options.queryString,
-      headers: new HttpHeaders({ "responseType": "blob" })
-    }, fileData).subscribe(d => {
-      const message:string = "Dosya yükleme işlemi başarılı";
-      if (this.options.isAdmin) {
-        this._alertifyService.message(message, {
-          messageType: MessageType.Success,
-          position:MessagePosition.ÜstSağ
-        })
-      } else {
-        this._toasterService.showToastrMessage("Başarılı",message,ToastrOpt.Success)
+      //formData şeklinde göndermemiz gerekiyor formDatayı newleyelim
+      const fileData: FormData = new FormData;
+      //drop edilen dosyalar bize NgxFileDrop entry şeklinde geliyor,bunları FileSystemFileEntry tipine dönüştürmeliyiz
+      //bu tipe dönüştürdükten sonra dosyanın file ı üzerinden file ın adını blob değerini vs de formDataya append ettik
+      for (const dosya of files) {
+        (dosya.fileEntry as FileSystemFileEntry).file((_file: File) => { fileData.append(_file.name, _file, dosya.relativePath) });
       }
-    }, (httpErrorResponse: HttpErrorResponse) => {
-      const message: string = "Dosya yükleme işleminde bir hata meydana geldi";
-      if (this.options.isAdmin) {
-        this._alertifyService.message(message, {
-          messageType: MessageType.Error,
-          position: MessagePosition.ÜstSağ
-        })
-      } else {
-        this._toasterService.showToastrMessage("İşlem Başarısız", message, ToastrOpt.Error)
-      }
-    })
+      this.httpclientService.post({
+        action: this.options.actionName,
+        controller: this.options.controllerName,
+        queryString: this.options.queryString,
+        headers: new HttpHeaders({ "responseType": "blob" })
+      }, fileData).subscribe(d => {
+        const message: string = "Dosya yükleme işlemi başarılı";
+        if (this.options.isAdmin) {
+          this._alertifyService.message(message, {
+            messageType: MessageType.Success,
+            position: MessagePosition.ÜstSağ
+          })
+        } else {
+          this._toasterService.showToastrMessage("Başarılı", message, ToastrOpt.Success)
+        }
+      }, (httpErrorResponse: HttpErrorResponse) => {
+        const message: string = "Dosya yükleme işleminde bir hata meydana geldi";
+        if (this.options.isAdmin) {
+          this._alertifyService.message(message, {
+            messageType: MessageType.Error,
+            position: MessagePosition.ÜstSağ
+          })
+        } else {
+          this._toasterService.showToastrMessage("İşlem Başarısız", message, ToastrOpt.Error)
+        }
+      })
+    });
+ 
+  }
+
+
+  openDialog(callback: any): void {
+    const dialogRef = this.dialog.open(UploadDialogComponent, {
+      width: '250px',
+      data: UploadDialogParameters.Yes,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      callback();
+    });
   }
 }
 

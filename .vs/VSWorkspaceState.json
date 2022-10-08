@@ -1,7 +1,6 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
     "\\src\\app\\admin\\components",
@@ -10,6 +9,5 @@
     "\\src\\app\\common",
     "\\src\\app\\common\\file-upload"
   ],
-  "SelectedNode": "\\src\\app\\admin\\components\\products\\create-product\\create-product.component.ts",
   "PreviewInSolutionExplorer": false
 }

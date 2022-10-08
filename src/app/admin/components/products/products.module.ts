@@ -15,6 +15,7 @@ import { EditDirective } from 'src/app/directives/admin/edit.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
 import { FileUploadModule } from '../../../common/file-upload/file-upload.module';
+import { UploadDialogComponent } from '../../../dialogs/upload-dialog/upload-dialog.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FileUploadModule } from '../../../common/file-upload/file-upload.module
     ListProductComponent,
     DeleteDirective,
     EditDirective,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    UploadDialogComponent
   ],
   imports: [
     CommonModule,

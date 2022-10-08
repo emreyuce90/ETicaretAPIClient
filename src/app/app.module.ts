@@ -14,11 +14,12 @@ import { DeleteDirective } from './directives/admin/delete.directive';
 import { EditDirective } from './directives/admin/edit.directive';
 import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { FileUploadComponent } from './common/file-upload/file-upload.component';
+import { UploadDialogComponent } from './dialogs/upload-dialog/upload-dialog.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
