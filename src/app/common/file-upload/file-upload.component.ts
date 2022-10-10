@@ -69,7 +69,7 @@ export class FileUploadComponent {
         }
       })
     });
- 
+
   }
 
 
@@ -80,8 +80,8 @@ export class FileUploadComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      callback();
+      if (result == UploadDialogParameters.Yes)
+        callback();
     });
   }
 }
