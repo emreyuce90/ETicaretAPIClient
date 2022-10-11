@@ -2,6 +2,8 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxFileDropEntry } from 'ngx-file-drop/ngx-file-drop/ngx-file-drop-entry';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from '../../base/base.component';
 import { UploadDialogComponent, UploadDialogParameters } from '../../dialogs/upload-dialog/upload-dialog.component';
 import { AlertifyService, MessagePosition, MessageType } from '../../services/admin/alertify.service';
 import { ToastrNotificationService, ToastrOpt } from '../../services/ui/toastr-notification.service';
@@ -19,8 +21,9 @@ export class FileUploadComponent {
       public dialog: MatDialog,
       private httpclientService: HttpClientService,
       private _toasterService: ToastrNotificationService,
-      private _alertifyService: AlertifyService
-    ) {
+      private _alertifyService: AlertifyService,
+      private _spinnerService:NgxSpinnerService
+  ) {
 
   }
 
@@ -42,12 +45,15 @@ export class FileUploadComponent {
       for (const dosya of files) {
         (dosya.fileEntry as FileSystemFileEntry).file((_file: File) => { fileData.append(_file.name, _file, dosya.relativePath) });
       }
+      this._spinnerService.show(SpinnerType.SpinBall);
       this.httpclientService.post({
         action: this.options.actionName,
         controller: this.options.controllerName,
         queryString: this.options.queryString,
         headers: new HttpHeaders({ "responseType": "blob" })
       }, fileData).subscribe(d => {
+        this._spinnerService.hide(SpinnerType.SpinBall);
+
         const message: string = "Dosya yükleme işlemi başarılı";
         if (this.options.isAdmin) {
           this._alertifyService.message(message, {
@@ -58,6 +64,8 @@ export class FileUploadComponent {
           this._toasterService.showToastrMessage("Başarılı", message, ToastrOpt.Success)
         }
       }, (httpErrorResponse: HttpErrorResponse) => {
+        this._spinnerService.hide(SpinnerType.SpinBall);
+
         const message: string = "Dosya yükleme işleminde bir hata meydana geldi";
         if (this.options.isAdmin) {
           this._alertifyService.message(message, {
