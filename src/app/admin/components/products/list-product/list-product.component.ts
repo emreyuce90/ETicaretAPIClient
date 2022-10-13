@@ -8,6 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductListWCount } from 'src/app/contracts/product-list-wcount';
 import { ProductlistViewModel } from 'src/app/contracts/productlistviewmodel';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageUploadComponent } from '../../../../dialogs/image-upload/image-upload.component';
 
 
 @Component({
@@ -17,12 +19,12 @@ import { ProductlistViewModel } from 'src/app/contracts/productlistviewmodel';
 })
 export class ListProductComponent extends BaseComponent implements OnInit {
 
-  constructor(private productService: ProductService, spinner: NgxSpinnerService, private alertify: AlertifyService) {
+  constructor(private productService: ProductService, spinner: NgxSpinnerService, private alertify: AlertifyService, public dialog: MatDialog) {
     super(spinner);
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   //dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'modifiedDate','edit','delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'modifiedDate','edit','addPhoto','delete'];
   dataSource: MatTableDataSource<ProductlistViewModel> = null;
   /*
  Sayfa ilk yüklendiğinde spinnerı aktif et ,başarılı olma durumunda spinnerı gizle,hata durumunda alrtifyla error mesajı bas,gelen datayı matTableData source türünden karşıla ve await ile beklenilen datayı data source a ver
@@ -44,6 +46,10 @@ export class ListProductComponent extends BaseComponent implements OnInit {
 
   async ngOnInit() {
     await this.listProduct();
+  }
+
+  addPhoto(id: string) {
+    this.dialog.open(ImageUploadComponent);
   }
 
 }

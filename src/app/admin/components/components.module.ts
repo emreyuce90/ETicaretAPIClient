@@ -8,7 +8,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ProductsModule } from './products/products.module';
 import { RouterModule } from '@angular/router';
 import { DeleteDirective } from '../../directives/admin/delete.directive';
-import { FileUploadModule } from '../../common/file-upload/file-upload.module';
+
 
 
 

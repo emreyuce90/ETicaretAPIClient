@@ -27,10 +27,6 @@ export class FileUploadComponent {
 
   }
 
-
-
-
-
   @Input() options: Partial<FileUploadOptions>;
   public files: NgxFileDropEntry[];
 
