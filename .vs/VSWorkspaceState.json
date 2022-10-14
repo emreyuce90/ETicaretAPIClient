@@ -6,8 +6,10 @@
     "\\src\\app\\admin",
     "\\src\\app\\admin\\components",
     "\\src\\app\\admin\\components\\products",
-    "\\src\\app\\admin\\components\\products\\list-product"
+    "\\src\\app\\admin\\components\\products\\create-product",
+    "\\src\\app\\common",
+    "\\src\\app\\common\\file-upload"
   ],
-  "SelectedNode": "\\src\\app\\admin\\components\\products\\list-product\\list-product.component.ts",
+  "SelectedNode": "\\src\\app\\admin\\components\\products\\create-product\\create-product.component.html",
   "PreviewInSolutionExplorer": false
 }

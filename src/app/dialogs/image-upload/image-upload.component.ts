@@ -9,8 +9,12 @@ import { FileUploadOptions } from '../../common/file-upload/file-upload.componen
 })
 export class ImageUploadComponent {
 
-  constructor(public dialogRef: MatDialogRef<ImageUploadComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,) { }
+  constructor(
+    public dialogRef: MatDialogRef<ImageUploadComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { productId: string }
+  ) {
+    console.log(this.data);
+  }
 
 
   close(): void {
@@ -23,7 +27,7 @@ export class ImageUploadComponent {
     controllerName: "products",
     isAdmin: true,
     actionName: "upload",
-    queryString:`id=${this.data}`
+    queryString:`id=${this.data.productId}`
   };
 
 

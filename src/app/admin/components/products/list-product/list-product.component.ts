@@ -10,6 +10,7 @@ import { ProductListWCount } from 'src/app/contracts/product-list-wcount';
 import { ProductlistViewModel } from 'src/app/contracts/productlistviewmodel';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageUploadComponent } from '../../../../dialogs/image-upload/image-upload.component';
+import { UploadDialogComponent } from '../../../../dialogs/upload-dialog/upload-dialog.component';
 
 
 @Component({
@@ -24,20 +25,20 @@ export class ListProductComponent extends BaseComponent implements OnInit {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   //dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'modifiedDate','edit','addPhoto','delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'modifiedDate', 'edit', 'addPhoto', 'delete'];
   dataSource: MatTableDataSource<ProductlistViewModel> = null;
   /*
  Sayfa ilk yüklendiğinde spinnerı aktif et ,başarılı olma durumunda spinnerı gizle,hata durumunda alrtifyla error mesajı bas,gelen datayı matTableData source türünden karşıla ve await ile beklenilen datayı data source a ver
   */
   async listProduct() {
     this.showSpinner(SpinnerType.BallTrianglePath);
-    const allProducts:ProductListWCount = await this.productService.list(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5, () => this.hideSpinner(SpinnerType.BallTrianglePath), errorMessage => this.alertify.message(errorMessage, {
+    const allProducts: ProductListWCount = await this.productService.list(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5, () => this.hideSpinner(SpinnerType.BallTrianglePath), errorMessage => this.alertify.message(errorMessage, {
       messageType: MessageType.Error,
       position: MessagePosition.ÜstSağ
     }))
     this.dataSource = new MatTableDataSource<ProductlistViewModel>(allProducts.productListViewModel);
 
-    this.paginator.length =allProducts.totalCount;
+    this.paginator.length = allProducts.totalCount;
 
   }
   async pageChanged() {
@@ -48,9 +49,11 @@ export class ListProductComponent extends BaseComponent implements OnInit {
     await this.listProduct();
   }
 
-  addPhoto(id: string) {
-    this.dialog.open(ImageUploadComponent);
-  }
+  addPhoto(id:string) {
+    let dialogRef = this.dialog.open(ImageUploadComponent, {
+      data: { productId:id },
+    });
 
+  }
 }
 

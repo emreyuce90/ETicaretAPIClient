@@ -41,6 +41,7 @@ export class FileUploadComponent {
       for (const dosya of files) {
         (dosya.fileEntry as FileSystemFileEntry).file((_file: File) => { fileData.append(_file.name, _file, dosya.relativePath) });
       }
+
       this._spinnerService.show(SpinnerType.SpinBall);
       this.httpclientService.post({
         action: this.options.actionName,
@@ -48,6 +49,7 @@ export class FileUploadComponent {
         queryString: this.options.queryString,
         headers: new HttpHeaders({ "responseType": "blob" })
       }, fileData).subscribe(d => {
+        
         this._spinnerService.hide(SpinnerType.SpinBall);
 
         const message: string = "Dosya yükleme işlemi başarılı";
