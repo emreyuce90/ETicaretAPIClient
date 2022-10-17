@@ -3,13 +3,11 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\admin",
     "\\src\\app\\admin\\components",
-    "\\src\\app\\admin\\components\\products",
-    "\\src\\app\\admin\\components\\products\\create-product",
     "\\src\\app\\common",
-    "\\src\\app\\common\\file-upload"
+    "\\src\\app\\dialogs\\image-upload",
+    "\\src\\app\\dialogs\\upload-dialog"
   ],
-  "SelectedNode": "\\src\\app\\admin\\components\\products\\create-product\\create-product.component.html",
+  "SelectedNode": "\\src\\app\\common\\http-client.service.ts",
   "PreviewInSolutionExplorer": false
 }

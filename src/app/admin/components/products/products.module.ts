@@ -17,7 +17,7 @@ import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dia
 import { FileUploadModule } from '../../../common/file-upload/file-upload.module';
 import { UploadDialogComponent } from '../../../dialogs/upload-dialog/upload-dialog.component';
 import { ImageUploadComponent } from '../../../dialogs/image-upload/image-upload.component';
-
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { ImageUploadComponent } from '../../../dialogs/image-upload/image-upload
     CommonModule,
     RouterModule.forChild([
       {path:"",component: ProductsComponent}
-    ]), MatSidenavModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatDialogModule, FileUploadModule
+    ]), MatSidenavModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatDialogModule, FileUploadModule, MatCardModule
   ]
 })
 export class ProductsModule { }
