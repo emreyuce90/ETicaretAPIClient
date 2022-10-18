@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from '../../base/base.component';
 import { HttpClientService } from '../../common/http-client.service';
-import { DeleteDialogComponent, DialogContent } from '../../dialogs/delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent, DialogDeleteContent } from '../../dialogs/delete-dialog/delete-dialog.component';
 import { AlertifyService, MessagePosition, MessageType } from '../../services/admin/alertify.service';
 import { ToastrNotificationService } from '../../services/ui/toastr-notification.service';
 declare var $: any;
@@ -74,11 +74,11 @@ export class DeleteDirective extends BaseComponent {
   openDialog(callBack: any): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
-      data: DialogContent.Yes,
+      data: DialogDeleteContent.Yes,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result == DialogContent.Yes)
+      if (result == DialogDeleteContent.Yes)
         callBack();
     });
   }

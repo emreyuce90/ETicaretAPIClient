@@ -18,7 +18,7 @@ export class DeleteDialogComponent {
   }
 
 }
-export enum DialogContent {
+export enum DialogDeleteContent {
   Yes,
   No
 }

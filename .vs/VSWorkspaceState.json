@@ -3,11 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\admin",
     "\\src\\app\\admin\\components",
-    "\\src\\app\\common",
-    "\\src\\app\\dialogs\\image-upload",
-    "\\src\\app\\dialogs\\upload-dialog"
+    "\\src\\app\\common\\models",
+    "\\src\\app\\dialogs",
+    "\\src\\app\\dialogs\\image-upload"
   ],
-  "SelectedNode": "\\src\\app\\common\\http-client.service.ts",
+  "SelectedNode": "\\src\\app\\dialogs\\image-upload\\image-upload.component.scss",
   "PreviewInSolutionExplorer": false
 }
