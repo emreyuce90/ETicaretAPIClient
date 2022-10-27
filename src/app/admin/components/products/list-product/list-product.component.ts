@@ -36,9 +36,9 @@ export class ListProductComponent extends BaseComponent implements OnInit {
       messageType: MessageType.Error,
       position: MessagePosition.ÜstSağ
     }))
-    this.dataSource = new MatTableDataSource<ProductlistViewModel>(allProducts.productListViewModel);
-
+    this.dataSource = new MatTableDataSource<ProductlistViewModel>(allProducts.products);
     this.paginator.length = allProducts.totalCount;
+
 
   }
   async pageChanged() {
