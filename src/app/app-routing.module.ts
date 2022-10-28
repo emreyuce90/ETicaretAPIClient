@@ -19,7 +19,8 @@ const routes: Routes = [
   // /basket geldiğinde basket component
   {path:"",component:HomeComponent},
   {path:"basket",loadChildren:()=>import("../app/ui/components/basket/basket.module").then(module=>module.BasketModule)},
-  {path:"products",loadChildren:()=>import("../app/ui/components/products/products.module").then(module=>module.ProductsModule)}
+  {path:"products",loadChildren:()=>import("../app/ui/components/products/products.module").then(module=>module.ProductsModule)},
+  {path:"register",loadChildren:()=>import("../app/ui/components/register/register.module").then(module=>module.RegisterModule)}
 
 ];
 
