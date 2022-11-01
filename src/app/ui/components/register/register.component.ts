@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/entity/user';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,8 @@ export class RegisterComponent implements OnInit {
     this.frm = this.formBuilder.group({
       adSoyad: ["", [
         Validators.required,
-        Validators.min(3),
-        Validators.max(50)
+        Validators.minLength(3),
+        Validators.maxLength(50)
       ]],
       kullaniciAdi: ["", 
       [Validators.required, 
@@ -45,7 +46,7 @@ export class RegisterComponent implements OnInit {
 
   submitted: boolean = false;
 
-  onSubmit(value: any) {
+  onSubmit(value: User) {
     this.submitted = true;
     debugger;
     var c = this.component;

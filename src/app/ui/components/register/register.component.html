@@ -5,27 +5,28 @@
                 <div class="mb-3">
                     <label for="adsoyad" class="form-label">Ad Soyad:</label>
                     <input [ngClass]="{'is-invalid': submitted && component.adSoyad.errors}" formControlName="adSoyad" type="text" class="form-control" id="adsoyad" aria-describedby="emailHelp">
-                    <div *ngIf="submitted && component.adSoyad.errors.required" id="emailHelp" class="form-text text-danger">Ad Soyad alanı boş geçilemez</div>
+                    <div *ngIf="submitted && component.adSoyad.errors?.required" id="emailHelp" class="form-text text-danger">Ad Soyad alanı boş geçilemez</div>
                 </div>
                 <div class="mb-3">
                     <label for="kullaniciAdi" class="form-label">Kullanıcı Adı:</label>
                     <input [ngClass]="{'is-invalid': submitted && component.kullaniciAdi.errors}" formControlName="kullaniciAdi" type="text" class="form-control" id="kullaniciAdi" aria-describedby="emailHelp">
-                    <div *ngIf="submitted && component.kullaniciAdi.errors.required" id="emailHelp" class="form-text text-danger">Kullanıcı adı alanı boş geçilemez</div>
+                    <div *ngIf="submitted && component.kullaniciAdi.errors?.required" id="emailHelp" class="form-text text-danger">Kullanıcı adı alanı boş geçilemez</div>
+                    <div *ngIf="submitted && (component.kullaniciAdi.errors?.maxlength || component.kullaniciAdi.errors?.minlength)" id="emailHelp" class="form-text text-danger">Minimum 3 maksimum 50 karakter girebilirsiniz</div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">E-Mail:</label>
                     <input [ngClass]="{'is-invalid': submitted && component.email.errors}" formControlName="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                    <div *ngIf="submitted && component.email.errors.required" id="emailHelp" class="form-text text-danger">E-Mail alanı boş geçilemez</div>
+                    <div *ngIf="submitted && component.email.errors?.required" id="emailHelp" class="form-text text-danger">E-Mail alanı boş geçilemez</div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Şifre:</label>
                     <input [ngClass]="{'is-invalid': submitted && component.password.errors}" formControlName="password" type="password" class="form-control" id="password">
-                    <div *ngIf="submitted && component.password.errors.required" id="emailHelp" class="form-text text-danger">Şifre alanı boş geçilemez</div>
+                    <div *ngIf="submitted && component.password.errors?.required" id="emailHelp" class="form-text text-danger ">Şifre alanı boş geçilemez</div>
                 </div>
                 <div class="mb-3">
                     <label for="passwordConfirm" class="form-label">Şifre(tekrar):</label>
                     <input [ngClass]="{'is-invalid': submitted && component.passwordConfirm.errors}" formControlName="passwordConfirm" type="password" class="form-control" id="passwordConfirm">
-                    <div *ngIf="submitted && component.passwordConfirm.errors.required" id="emailHelp" class="form-text text-danger ">Şifre tekrar alanı boş geçilemez</div>
+                    <div *ngIf="submitted && component.passwordConfirm.errors?.required" id="emailHelp" class="form-text text-danger ">Şifre tekrar alanı boş geçilemez</div>
                 </div>
                 <button type="submit" class="btn btn-success">Kayıt Ol</button>
             </form>
