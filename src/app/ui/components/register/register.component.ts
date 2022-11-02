@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsersService } from 'src/app/common/models/users.service';
+import { UserCreate } from 'src/app/contracts/user_create';
 import { User } from 'src/app/entity/user';
+import { ToastrNotificationService, ToastrOpt } from 'src/app/services/ui/toastr-notification.service';
 
 @Component({
   selector: 'app-register',
@@ -9,33 +12,33 @@ import { User } from 'src/app/entity/user';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private notify: ToastrNotificationService, private userService: UsersService) { }
   frm: FormGroup;
   ngOnInit(): void {
 
     this.frm = this.formBuilder.group({
-      adSoyad: ["", [
+      nameSurname: ["", [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(50)
       ]],
-      kullaniciAdi: ["", 
-      [Validators.required, 
-        Validators.min(3), 
+      username: ["",
+        [Validators.required,
+        Validators.min(3),
         Validators.max(50)
-      ]],
-      email: ["", 
-      [Validators.email, 
+        ]],
+      email: ["",
+        [Validators.email,
         Validators.required
-      ]],
+        ]],
       password: ["", [
         Validators.required,
-         
-        ]],
-      passwordConfirm: ["", 
-      [
-        Validators.required
-      ]]
+
+      ]],
+      passwordConfirm: ["",
+        [
+          Validators.required
+        ]]
     })
   }
 
@@ -46,12 +49,23 @@ export class RegisterComponent implements OnInit {
 
   submitted: boolean = false;
 
-  onSubmit(value: User) {
+  async onSubmit(user: User) {
     this.submitted = true;
-    debugger;
-    var c = this.component;
-    if (this.frm.invalid)
-      return;
+    if (!this.frm.invalid) {
+      //post method 
+      const data: UserCreate = await this.userService.createUser(user);
+      debugger;
+      if (data.isSucceeded) {
+        this.notify.showToastrMessage("İşlem Başarılı", data.message, ToastrOpt.Success);
+      }
+      else {
+        this.notify.showToastrMessage("Hata", data.message, ToastrOpt.Error);
+
+      }
+
+
+    }
+    return;
   }
 
 }

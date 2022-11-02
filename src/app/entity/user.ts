@@ -1,6 +1,6 @@
 export class User {
-   adSoyad:string;
-   kullaniciAdi:string;
+   nameSurname:string;
+   username:string;
    email:string;
    password:string;
    passwordConfirm:string; 
