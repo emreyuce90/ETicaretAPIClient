@@ -1,0 +1,16 @@
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="container shadow p-3">
+            <div class="mb-3">
+                <label class="form-label">Kullanıcı Adı & E-Mail Adresiniz :</label>
+                <input #txtusername type="text" class="form-control">
+            
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Şifreniz :</label>
+                <input #txtpassword type="password" class="form-control">
+            </div>
+            <button type="submit" (click)="login(txtusername.value,txtpassword.value)" class="btn btn-success">Giriş Yap</button>
+        </div>
+    </div>
+</div>

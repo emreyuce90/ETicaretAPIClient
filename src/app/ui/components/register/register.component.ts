@@ -51,21 +51,16 @@ export class RegisterComponent implements OnInit {
 
   async onSubmit(user: User) {
     this.submitted = true;
-    if (!this.frm.invalid) {
-      //post method 
-      const data: UserCreate = await this.userService.createUser(user);
-      debugger;
-      if (data.isSucceeded) {
-        this.notify.showToastrMessage("İşlem Başarılı", data.message, ToastrOpt.Success);
-      }
-      else {
-        this.notify.showToastrMessage("Hata", data.message, ToastrOpt.Error);
+    if (this.frm.invalid)
+      return;
+    //post method 
+  
+    const data: UserCreate = await this.userService.createUser(user);
+    if(data.isSucceeded)
+      this.notify.showToastrMessage("İşlem Başarılı", data.message, ToastrOpt.Success);
+    else
+      this.notify.showToastrMessage("Hata", data.message, ToastrOpt.Error);
 
-      }
-
-
-    }
-    return;
   }
 
 }

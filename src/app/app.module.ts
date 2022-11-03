@@ -27,7 +27,7 @@ import { ImageUploadComponent } from './dialogs/image-upload/image-upload.compon
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AdminModule, UiModule,
+    AdminModule,UiModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     HttpClientModule

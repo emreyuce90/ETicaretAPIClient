@@ -20,7 +20,9 @@ const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"basket",loadChildren:()=>import("../app/ui/components/basket/basket.module").then(module=>module.BasketModule)},
   {path:"products",loadChildren:()=>import("../app/ui/components/products/products.module").then(module=>module.ProductsModule)},
-  {path:"register",loadChildren:()=>import("../app/ui/components/register/register.module").then(module=>module.RegisterModule)}
+  {path:"register",loadChildren:()=>import("../app/ui/components/register/register.module").then(module=>module.RegisterModule)},
+  {path:"login",loadChildren:()=>import("../app/ui/components/login/login.module").then(module=>module.LoginModule)}
+
 
 ];
 

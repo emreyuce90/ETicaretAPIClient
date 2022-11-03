@@ -7,6 +7,7 @@ import { RegisterModule } from './register/register.module';
 
 
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -14,7 +15,8 @@ import { RegisterModule } from './register/register.module';
     BasketModule,
     ProductsModule,
     HomeModule,
-    RegisterModule
+    RegisterModule,
+
   ]
 })
 export class ComponentsModule { }
