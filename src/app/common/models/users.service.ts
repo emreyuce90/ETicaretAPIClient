@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import { Token } from 'src/app/contracts/token';
+import { TokenResponse } from 'src/app/contracts/tokenResponse';
+import { UserCreateResponse } from 'src/app/contracts/userCreateResponse';
 import { UserCreate } from 'src/app/contracts/user_create';
 import { User } from 'src/app/entity/user';
 import { HttpClientService } from '../http-client.service';
@@ -32,24 +34,24 @@ export class UsersService {
     password: string,
     successCalback?: () => void
   ): Promise<void> {
-    const response: Observable<any | Token> = this._httpClientservice.post<
-      any | Token
-    >(
-      {
-        controller: 'users',
-        action: 'login',
-      },
-      { username, password }
-    );
-    const token: Token = (await firstValueFrom(response)) as Token;
-    if (token)
-      this.toastrService.success(
-        'Kullanıcı doğrulama başarılı',
-        'İşlem Başarılı',
+    const response: Observable<any | TokenResponse> =
+      this._httpClientservice.post<any | TokenResponse>(
         {
-          progressBar: true,
-        }
+          controller: 'users',
+          action: 'login',
+        },
+        { username, password }
       );
+    const tokenResponse: TokenResponse = (await firstValueFrom(response)) as TokenResponse;
+    if (tokenResponse)
+      localStorage.setItem('accessToken', tokenResponse.token.accessToken);
+    this.toastrService.success(
+      'Kullanıcı doğrulama başarılı',
+      'İşlem Başarılı',
+      {
+        progressBar: true,
+      }
+    );
     successCalback();
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/common/models/users.service';
+import { UserCreateResponse } from 'src/app/contracts/userCreateResponse';
 import { UserCreate } from 'src/app/contracts/user_create';
 import { User } from 'src/app/entity/user';
 import { ToastrNotificationService, ToastrOpt } from 'src/app/services/ui/toastr-notification.service';
@@ -53,9 +54,10 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     if (this.frm.invalid)
       return;
-    //post method 
-  
+    //post method
+
     const data: UserCreate = await this.userService.createUser(user);
+    debugger;
     if(data.isSucceeded)
       this.notify.showToastrMessage("İşlem Başarılı", data.message, ToastrOpt.Success);
     else
