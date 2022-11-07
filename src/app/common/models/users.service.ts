@@ -18,22 +18,12 @@ export class UsersService {
   ) {}
 
   async createUser(user: User): Promise<UserCreate> {
-    const data: Observable<User | UserCreate> = this._httpClientservice.post<
-      User | UserCreate
-    >(
-      {
-        controller: 'users',
-      },
-      user
-    );
+    const data: Observable<User | UserCreate> = this._httpClientservice.post<User | UserCreate
+    >({controller: 'users',},user);
     return (await firstValueFrom(data)) as UserCreate;
   }
 
-  async login(
-    username: string,
-    password: string,
-    successCalback?: () => void
-  ): Promise<void> {
+  async login(username: string,password: string,successCalback?: () => void): Promise<void> {
     const response: Observable<any | TokenResponse> =
       this._httpClientservice.post<any | TokenResponse>(
         {
