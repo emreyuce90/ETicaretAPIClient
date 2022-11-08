@@ -16,6 +16,7 @@ import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.com
 import { FileUploadComponent } from './common/file-upload/file-upload.component';
 import { UploadDialogComponent } from './dialogs/upload-dialog/upload-dialog.component';
 import { ImageUploadComponent } from './dialogs/image-upload/image-upload.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 
@@ -24,6 +25,12 @@ import { ImageUploadComponent } from './dialogs/image-upload/image-upload.compon
     AppComponent
   ],
   imports: [
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:()=>localStorage.getItem("accessToken"),
+        allowedDomains:["localhost:7021"]
+      }
+    }),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

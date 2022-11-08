@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from './services/common/auth.service';
 import { ToastrNotificationService, ToastrOpt } from './services/ui/toastr-notification.service';
 
 declare var $:any;
@@ -16,13 +17,10 @@ export class AppComponent {
   //   toastr.showToastrMessage("Test","LoremIpsum",ToastrOpt.Success);
 
   // }
-  constructor(){}
+  constructor(public authService:AuthService){
+    this.authService.checkToken();
+  }
+  
 }
-// $.ajax({
-//   method:"get",
-//   url:"https://localhost:7021/api/products",
-//   success:function(data){
-//     console.log(data)
-//   }
-// })
+
 
