@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './services/common/auth.service';
 import { ToastrNotificationService, ToastrOpt } from './services/ui/toastr-notification.service';
 
@@ -17,8 +19,18 @@ export class AppComponent {
   //   toastr.showToastrMessage("Test","LoremIpsum",ToastrOpt.Success);
 
   // }
-  constructor(public authService:AuthService){
+  constructor(public authService:AuthService,private toasterService:ToastrService,private router:Router){
     this.authService.checkToken();
+  }
+
+  logOut(){
+    localStorage.removeItem("accessToken");
+    this.authService.checkToken();
+    this.router.navigate(["/login"]);
+    this.toasterService.warning("Oturum kapatıldı","Oturum Kapatıldı",{
+
+      progressBar:true
+    });
   }
   
 }

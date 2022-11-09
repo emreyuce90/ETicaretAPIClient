@@ -27,6 +27,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" routerLink="basket">Sepet</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-danger" *ngIf="authService.isAuthenticated" style="cursor:pointer" (click)="logOut()" aria-current="page" >Çıkış Yap</a>
+                            </li>
                             <li><a class="btn btn-outline-success" type="submit" routerLink="admin" *ngIf="authService.isAuthenticated">Admin Paneline
                                     Git</a></li>
                         </ul>
